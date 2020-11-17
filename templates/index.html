@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+  <title>Team Ace (Team 89) Demo</title>
+
+
+</head>
+<style>
+  form {
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+}
+</style>
+<body>
+  <h1>
+    Panda Local
+  </h1>
+  <p>
+        note: can only delete a manually inserted player to preserve tournament history
+    </p>
+
+</p>
+
+<form class="p-3" action = "/insert" method="POST" autocomplete="off">
+    <div class = "form-group">
+      <label for = "chooseCommand">Query Smash Player</label>
+      <select name = "chooseField" class="form-control" id="crudChoices">
+        <option selected="selected" value="search">Search</option>
+        <option value="insert">Insert</option>
+        <option value="update">Update</option>
+        <option value="delete">Delete</option>
+        <!-- <option value="placement">Group By Placement</option> -->
+      </select>
+    </div>
+    <div class="form-group" id="baseDiv">
+      <div class="row">
+        <div class="col-6">
+        <!-- <label for="otherField1">Group: Heres One!</label> -->
+          <input name= "baseInput" value="" placeholder="Input Gamer Tag" type="text" class="form-control w-100" id="baseField">
+        </div>
+      </div>
+    </div>
+    <div class="form-group" id="updateDiv">
+      <div class="row">
+        <div class="col-6">
+          <!-- <label for="otherField1">Group: Heres One!</label> -->
+          <input name="updateField1" type="text" value="" class="form-control w-100" id="otherField1">
+        </div>
+        <div class="col-6">
+          <!-- <label for="otherField2">Group: Another One!</label> -->
+          <input name="updateField2" type="text" value="" class="form-control w-100" id="otherField2">
+        </div>
+      </div>
+    </div>
+    <input type="submit" name="submit100" value="Submit" class="btn btn-outline-primary">
+  </form>
+<!-- <form action="/insert" method="POST">
+    <div class="form-group">
+      <label for="101">SEARCH QUERY:</label>
+      <input name = "gamertag_search" type="text">
+    </div>
+    <br>
+    <input type="submit" name="submit101" value="Submit" class="btn btn-success">
+  </form>
+
+<form action="/insert" method="POST">
+    <div class="form-group">
+      <label for="110">UPDATE QUERY:</label>
+      <input name = "gamertag_update" type="text">
+    </div>
+    <br>
+    <input type="submit" name="submit101" value="Submit" class="btn btn-success">
+  </form>
+
+<form action="/insert" method="POST">
+    <div class="form-group">
+      <label for="111">DELETE QUERY:</label>
+      <input name = "gamertag_delete" type="text">
+    </div>
+    <br>
+    <input type="submit" name="submit111" value="Submit" class="btn btn-success">
+  </form> -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <!-- <script src="hide-show-fields-form.js" type="text/javascript"></script>   -->
+  <script>$("#crudChoices").change(function() {
+    if ($(this).val() == "search" || $(this).val() == "insert" || $(this).val() == "delete" || $(this).val() == "placement") {
+        $('#baseDiv').show();
+        $('#baseField').attr('required', '');
+        $('#baseField').attr('data-error', 'This field is required');
+
+        $('#updateDiv').hide();
+        $('#otherField1').removeAttr('required');
+        $('#otherField1').removeAttr('data-error');
+        $('#otherField2').removeAttr('required');
+        $('#otherField2').removeAttr('data-error');
+    } else {
+        $('#updateDiv').show();
+        $('#otherField1').attr('required', '');
+        $('#otherField1').attr('data-error', 'This field is required');
+        $('#otherField2').attr('required', '');
+        $('#otherField2').attr('data-error', 'This field is required');
+        $('#otherField1').attr('placeholder', 'Old Gamer Tag');
+        $('#otherField2').attr('placeholder', 'New Gamer Tag');
+
+        $('#baseDiv').hide();
+        $('#baseField').removeAttr('required');
+        $('#baseField').removeAttr('data-error');
+    }
+});
+$("#crudChoices").trigger("change");</script>
+<h4> Results:</h4>
+{{var}}
+</body>
+</html>
+
+
