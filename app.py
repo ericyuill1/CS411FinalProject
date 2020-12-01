@@ -32,9 +32,7 @@ def insert():
     results = None
     if action == "search":
         gamertag = request.form['baseInput']
-        print(gamertag)
         results = db.get_player_by_gamertag(gamertag)
-        print(len(results))
     elif action == "insert":
         gamertag = request.form['baseInput']
         results = db.insert_player_by_gamertag(gamertag)

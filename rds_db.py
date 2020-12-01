@@ -3,15 +3,8 @@
 Created on Sat Jul 25 13:34:18 2020
 @author: hp
 """
-
-import pymysql
-conn = pymysql.connect(
-    host = "panda-local.cmcngdzhrbgb.us-east-2.rds.amazonaws.com",
-    port = 3306,
-    user = "admin",
-    password = "advaitejaeric",
-    database = "smash"
-)
+import json
+from aws_credentials import conn
 
 #Table Creation
 #cursor=conn.cursor()
@@ -29,10 +22,18 @@ get_player(playerId)
 
 
 def get_player_by_gamertag(tag):
-    query = f"SELECT * FROM Player WHERE gamer_tag = '{tag}'"
+    query = f"SELECT * FROM players LIMIT 100"
     cur=conn.cursor()
     cur.execute(query)
     details = cur.fetchall()
+    player_list = []
+    for i in details:
+        t = (i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], i[9], i[10], i[11])
+        player_list.append(t)
+    j = json.dumps(player_list, indent=2)
+    print(j)
+    with open("player_data.json", "w") as f:
+        f.write(j)
     return details
 
 def insert_player_by_gamertag(tag):
@@ -50,7 +51,7 @@ def update_player_by_gamertag(old_tag, new_tag):
     return 
 
 def delete_player_by_gamertag(tag):
-    query = f"DELETE FROM Player WHERE gamer_tag = '{tag}' AND scraped = 'F'"
+    query = f"DELETE FROM Player WHERE gamer_tag = '{tag}'"
     cur = conn.cursor()
     cur.execute(query)
     conn.commit()
@@ -63,3 +64,5 @@ def get_players_by_placement(placement):
     cur.execute(query)
     details = cur.fetchall()
     return details
+
+
