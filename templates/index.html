@@ -117,6 +117,81 @@ $("#crudChoices").trigger("change");</script>
 <h4> Results:</h4>
 {{var}}
 </body>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+h1 {text-align: center;}
+.container {
+  width: 100%;
+  background-color: #ddd;
+}
+
+.skills {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+
+.one {width: 100%; background-color: hsl(192, 100%, 50%);}
+.two {width: 94%; background-color:  hsl(192, 100%, 50%);}
+.three {width: 89%; background-color: hsl(192, 100%, 50%);}
+.four {width: 84%; background-color: hsl(192, 100%, 50%);}
+.five {width: 77%; background-color: hsl(192, 100%, 50%);}
+.six {width: 76%; background-color:  hsl(192, 100%, 50%);}
+.seven {width: 69%; background-color: hsl(192, 100%, 50%);}
+.eight {width: 63%; background-color: hsl(192, 100%, 50%);}
+
+</style>
+</head>
+<body>
+
+<h1>Top 8:</h1>
+
+<p>{{var_player}}</p>
+<div class="container">
+  <div class="skills one">{{var_elo}}</div>
+</div>
+
+<p>{{var_player}}</p>
+<div class="container">
+  <div class="skills two">{{var_elo}}</div>
+</div>
+
+<p>{{var_player}}</p>
+<div class="container">
+  <div class="skills three">{{var_elo}}</div>
+</div>
+
+<p>{{var_player}}</p>
+<div class="container">
+  <div class="skills four">{{var_elo}}</div>
+</div>
+
+<p>{{var_player}}</p>
+<div class="container">
+  <div class="skills five">{{var_elo}}</div>
+</div>
+
+<p>{{var_player}}</p>
+<div class="container">
+  <div class="skills six">{{var_elo}}</div>
+</div>
+
+<p>{{var_player}}</p>
+<div class="container">
+  <div class="skills seven">{{var_elo}}</div>
+</div>
+
+<p>{{var_player}}</p>
+<div class="container">
+  <div class="skills eight">{{var_elo}}</div>
+</div>
+
+</body>
+
 </html>
 
 
