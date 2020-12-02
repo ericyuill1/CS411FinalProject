@@ -9,3 +9,20 @@
     float: left;
     display: inline-block;
 }
+.span {
+    display: inline-block;
+    margin-bottom: 10px; /** Change this value to whatever you wish **/
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.th {
+    background-color: #002fff;
+    color: white;
+}
