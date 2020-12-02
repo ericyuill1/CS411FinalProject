@@ -22,18 +22,18 @@ get_player(playerId)
 
 
 def get_player_by_gamertag(tag):
-    query = f"SELECT * FROM players LIMIT 100"
+    query = f"SELECT placings FROM players where tag='{tag}'"
     cur=conn.cursor()
     cur.execute(query)
     details = cur.fetchall()
-    player_list = []
-    for i in details:
-        t = (i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], i[9], i[10], i[11])
-        player_list.append(t)
-    j = json.dumps(player_list, indent=2)
-    print(j)
-    with open("player_data.json", "w") as f:
-        f.write(j)
+    # player_list = []
+    # for i in details:
+    #     t = (i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], i[9], i[10], i[11])
+    #     player_list.append(t)
+    # j = json.dumps(player_list, indent=2)
+    # print(j)
+    # with open("player_data.json", "w") as f:
+    #     f.write(j)
     return details
 
 def insert_player_by_gamertag(tag):

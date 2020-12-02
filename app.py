@@ -4,11 +4,24 @@ Created on Sat Jul 25 12:02:51 2020
 @author: hp
 """
 
-from flask import Flask, render_template, request, flash, redirect,url_for, jsonify, session 
+from flask import Flask, render_template, request, flash, redirect,url_for, jsonify, session, make_response
 from flask import Response,send_file
-
+import os
+import json
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-
+CORS(app, support_credentials=True)
+app.config['CORS_HEADERS'] = 'Content-Type'
+# https://medium.com/@eric.hung0404/deal-with-cors-without-flask-cors-an-example-of-react-and-flask-5832c44108a7
+def build_preflight_response():
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add('Access-Control-Allow-Headers', "*")
+    response.headers.add('Access-Control-Allow-Methods', "*")
+    return response
+def build_actual_response(response):
+    # response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 import rds_db as db
 @app.route('/', methods=['get'])
 @app.route('/index', methods=['get', 'post'])
@@ -55,10 +68,38 @@ def handle_request(request):
 #         var = "Sorry! That record was not found"
 #         return render_template('index.html', var=var)
 #     return render_template('index.html', var=results)
+import requests
+
+
+def pretty_print_POST(req):
+    """
+    At this point it is completely built and ready
+    to be fired; it is "prepared".
+
+    However pay attention at the formatting used in 
+    this function because it is programmed to be pretty 
+    printed and may differ from the actual request.
+    """
+    print('{}\n{}\r\n{}\r\n\r\n{}'.format(
+        '-----------START-----------',
+        req.method + ' ' + req.url,
+        '\r\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items()),
+        req.body,
+    ))
+
+
+
 @app.route('/search', methods=['post'])
+@cross_origin(supports_credentials=True)
 def search():
-    
+    req = json.loads(request.data)
+    gamertag = req['tag']
+    # print(gamertag)
+    results = db.get_player_by_gamertag(gamertag)
+    # print(results[0][0])
+    res = json.loads(results[0][0])
+    # print(res)
+    return build_actual_response(jsonify(res))
 
 if __name__ == "__main__":
-    
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=os.environ.get('PORT', 3000), debug=True)
