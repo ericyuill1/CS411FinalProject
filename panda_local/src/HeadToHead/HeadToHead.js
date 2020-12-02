@@ -90,22 +90,11 @@ export default class HeadToHead extends Component {
             </table>
         </center>
 
-        <button onClick={this._showMessage.bind(null, true)}>Fight</button>
-        <button onClick={this._showMessage.bind(null, false)}>Adjourn</button>
         <button onClick={this.requestHeadtoHead}>Show</button>
         <br></br>
             { (
 
             <div>   
-                <br></br>
-
-                {this.state.p1} elo:
-
-                <br></br>
-                
-                {this.state.p2} elo: 
-                
-                <br></br>
                 <div>
                 <this.ListLoading isLoading={this.state.loading} repos={this.state.repos}/>
                 </div>

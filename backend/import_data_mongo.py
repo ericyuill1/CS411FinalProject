@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, flash, redirect,url_for, json
 # dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
 # table = dynamodb.Table("players")
 results = db.get_set_game_count("MkLeo", "Marss")
+print(results)
 print(len(results))
 # p1 = "MkLeo" # data["player1"]
 # p2 = "Marss" # data["player2"] 

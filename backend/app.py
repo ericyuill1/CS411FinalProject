@@ -257,22 +257,41 @@ def get_head_to_head():
     
     for k in actual:
         actual2[cleaned_names[k]] = actual[k]
+
+    
+    
+    id_tag = {}
+    print(db.get_playerid_by_tag(p1))
+    print(db.get_playerid_by_tag(p2))
+    id_tag[db.get_playerid_by_tag(p1)[0][0]] = p1
+    id_tag[db.get_playerid_by_tag(p2)[0][0]] = p2
+
+        
+
     obj_list = []
     d = collections.OrderedDict()
     d['player1'] = p1
     d['player2'] = p2
-    obj_list.append(d)
-
-    d = collections.OrderedDict()
-    d['sets1'] = 0
-    d['sets2'] = 0
-    obj_list.append(d)
-
-    d = collections.OrderedDict()
-    d['games1'] = 0
-    d['games2'] = 0
-    obj_list.append(d)
     
+
+    sets = collections.OrderedDict()
+    sets[p1] = 0
+    sets[p2] = 0
+    
+
+    games = collections.OrderedDict()
+    games[p1] = 0
+    games[p2] = 0
+
+    results = db.get_set_game_count(p1, p2)
+    for res in results:
+        sets[id_tag[res[1]]] += 1
+        games[id_tag[res[2]]] += res[4]
+        games[id_tag[res[3]]] += res[5]
+    obj_list.append(d)
+    obj_list.append(sets)
+    obj_list.append(games)
+
     d = collections.OrderedDict()
     for row in actual2:
         d = collections.OrderedDict()

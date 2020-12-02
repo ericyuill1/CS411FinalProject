@@ -3,7 +3,6 @@ import react from 'react';
 import styles from "./HeadToHeadList.module.css";
 const EloList = (props) => {
   const { repos } = props;
-  repos.splice(0, 4);
   if (!repos || repos.length === 0) return <p>No Tournaments entered by that player, sorry</p>;
   return (
       <table className ={styles.table} key="Elo table">

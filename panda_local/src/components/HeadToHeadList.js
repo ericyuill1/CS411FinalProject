@@ -5,6 +5,9 @@ const HeadToHeadList = (props) => {
   const { repos } = props;
   if (!repos || repos.length === 0) return <p>No Tournaments entered by that player, sorry</p>;
   return (
+      <div>
+  <p>Set Count: {repos[1][repos[0]["player1"]]} - {repos[1][repos[0]["player2"]]} ({100 * repos[1][repos[0]["player1"]] / (repos[1][repos[0]["player1"]] + repos[1][repos[0]["player2"]])})%</p>
+  <p>Game Count: {repos[2][repos[0]["player1"]]} - {repos[2][repos[0]["player2"]]} ({100 * repos[2][repos[0]["player1"]] / (repos[2][repos[0]["player1"]] + repos[2][repos[0]["player2"]])})%</p>
       <table>
         <tr>
             <th>{repos[0]["player1"]} Placement</th>
@@ -22,6 +25,7 @@ const HeadToHeadList = (props) => {
             );
         })}
       </table>
+      </div>
     // <ul>
     //   <h2 className='list-head'>Tournament Placings by that Player</h2>
     //   {repos.map((repo) => {
