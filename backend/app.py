@@ -54,7 +54,7 @@ class Sets:
         self.Bscore = Bscore
         self.bracket = bracket
 
-@app.route("/headtohead", methods=["post"])
+@app.route("/plr", methods=["post"])
 @cross_origin(support_credentials=True)
 def eloRankings():
     pgr_player_tourneys = set()
@@ -138,8 +138,32 @@ def eloRankings():
     final2 = {}
     for item in final:
         final2[item.name] = item.elo
+    obj_list = []
+    for row in final2:
+        d = collections.OrderedDict()
+        d['Player'] = row
+        d['Elo'] = final2[row]
+        obj_list.append(d)
+    return jsonify(obj_list)
 
-    return jsonify(final2)
+@app.route("/pgr", methods=["post"])
+@cross_origin(support_credentials=True)
+def get_pgru_rankings():
+    pgr50 = dict(db.get_pgr50())
+    # print(pgr50)
+    pgr50ids = list(pgr50.keys())
+    # print(pgr50ids)
+    player_ids = dict(db.get_gamertag_by_idlist(list(pgr50ids)))
+    result = {}
+    for ids in pgr50.keys():
+        result[player_ids[ids]] = pgr50[ids]
+    obj_list = []
+    for row in result:
+        d = collections.OrderedDict()
+        d['Player'] = row
+        d['Elo'] = result[row]
+        obj_list.append(d)
+    return jsonify(obj_list)
 
 def handle_request(request):
     # print(request.form)
@@ -234,6 +258,22 @@ def get_head_to_head():
     for k in actual:
         actual2[cleaned_names[k]] = actual[k]
     obj_list = []
+    d = collections.OrderedDict()
+    d['player1'] = p1
+    d['player2'] = p2
+    obj_list.append(d)
+
+    d = collections.OrderedDict()
+    d['sets1'] = 0
+    d['sets2'] = 0
+    obj_list.append(d)
+
+    d = collections.OrderedDict()
+    d['games1'] = 0
+    d['games2'] = 0
+    obj_list.append(d)
+    
+    d = collections.OrderedDict()
     for row in actual2:
         d = collections.OrderedDict()
         d['tournament'] = row

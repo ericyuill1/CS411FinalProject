@@ -7,12 +7,12 @@ const HeadToHeadList = (props) => {
   return (
       <table>
         <tr>
-            <th>Player 1 Placement</th>
+            <th>{repos[0]["player1"]} Placement</th>
             <th>Tournament Name</th> 
-            <th>Player 2 Placement</th>
+            <th>{repos[0]["player2"]} Placement</th>
         </tr>
       
-        {repos.map((repo) => {
+        {repos.splice(3).map((repo) => {
             return (
             <tr key={repo.id} className='list'>
                 <td >{repo.placings[0]}</td>

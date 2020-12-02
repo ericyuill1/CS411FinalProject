@@ -11,13 +11,14 @@ const Navigation = (props) => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="mr-auto">
+          <Nav.Link href="/Elo">Rankings</Nav.Link>
             <Nav.Link href="/Tournaments">Tournaments</Nav.Link>
             <Nav.Link href="/HeadToHead">Head to Head</Nav.Link>
             <Nav.Link href="#CRUD">crud</Nav.Link>
-            <NavDropdown title="Games">
+            {/* <NavDropdown title="Games">
               <NavDropdown.Item href="#action/1">Melee</NavDropdown.Item>
               <NavDropdown.Item href="#action/2">Ultimate</NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="search" className="mr-sm-2" />
