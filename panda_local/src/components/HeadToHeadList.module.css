@@ -1,0 +1,6 @@
+.span {
+    display: inline-block;
+    margin-bottom: 10px; /** Change this value to whatever you wish **/
+    margin-left: 5px;
+    margin-right: 5px;
+}
